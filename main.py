@@ -2,9 +2,14 @@ import os
 import subprocess
 import tempfile
 from flask import Flask, request, jsonify, render_template_string
+from flask_cors import CORS
 
 # Initialize the Flask application
 app = Flask(__name__)
+
+# Enable CORS for all routes and origins.
+# This allows the service to be called from any domain.
+CORS(app)
 
 # HTML template for the simple UI
 # This will be served at the root URL
@@ -88,9 +93,7 @@ HTML_TEMPLATE = """
 
 @app.route('/')
 def index():
-    """
-    Serves the simple HTML user interface.
-    """
+    """Serves the simple HTML user interface."""
     return render_template_string(HTML_TEMPLATE)
 
 # Define the path for the '/convert' endpoint, accepting POST requests
